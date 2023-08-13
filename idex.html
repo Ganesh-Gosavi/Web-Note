@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notes App</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Notes App</h1>
+        <form>
+            <input type="text" placeholder="Title" id="title">
+            <textarea placeholder="Write your note here" id="note"></textarea>
+            <button type="button" onclick="addNote()">Add Note</button>
+        </form>
+        <ul id="notes"></ul>
+    </div>
+     
+    </div>
+ <!-- <a href="https://youtu.be/tPdD3lafq-c"><div class="link">Learn to code
+    
+    
+     -->
+
+
+
+
+
+    <script>
+        const notes = [];
+
+function addNote() {
+    const titleInput = document.getElementById("title");
+    const noteInput = document.getElementById("note");
+    const title = titleInput.value;
+    const note = noteInput.value;
+    if (title === "" || note === "") {
+        alert("Please enter a title and a note");
+        return;
+    }
+    const noteObject = {title, note};
+    notes.push(noteObject);
+    titleInput.value = "";
+    noteInput.value = "";
+    displayNotes();
+}
+
+function displayNotes() {
+    const notesList = document.getElementById("notes");
+    notesList.innerHTML = "";
+    notes.forEach((note, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <h2>${note.title}</h2>
+            <p>${note.note}</p>
+            <button onclick="deleteNote(${index})">Delete</button>
+        `;
+        notesList.appendChild(li);
+    });
+}
+
+function deleteNote(index) {
+    notes.splice(index, 1);
+    displayNotes();
+}
+
+    </script>
+</body>
+</html>
